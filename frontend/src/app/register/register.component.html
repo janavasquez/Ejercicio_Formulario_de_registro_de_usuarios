@@ -1,0 +1,75 @@
+<main class="form-signin w-100 m-auto">
+  <form [formGroup]="registerForm" (ngSubmit)="save()">
+    <h1 class="h3 mb-3 fw-normal">Crear nueva cuenta</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="nombreCompleto" placeholder="alan_sastre" formControlName="nombreCompleto">
+      <label for="nombreCompleto">Nombre</label>
+      @if(registerForm.controls.nombreCompleto.touched && registerForm.controls.nombreCompleto.errors) {
+        <div>
+          @if (registerForm.controls.nombreCompleto.errors['required']) {
+            <small class="text-danger">El nombre es obligatorio.</small>
+          }
+          @if (registerForm.controls.nombreCompleto.errors['minlength']) {
+            <small class="text-danger">Nickname debe tener longitud >= 5 caracteres.</small>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="form-floating">
+      <input type="email" class="form-control" id="correoElectronico" placeholder="name@example.com" formControlName="correoElectronico">
+      <label for="email">Email</label>
+      @if(registerForm.controls.correoElectronico.touched && registerForm.controls.correoElectronico.errors) {
+        <div>
+          @if (registerForm.controls.correoElectronico.errors['required']) {
+            <small class="text-danger">Email es obligatorio.</small>
+          }
+          @if (registerForm.controls.correoElectronico.errors['email']) {
+            <small class="text-danger">Email debe tener formato correcto.</small>
+
+          }
+        </div>
+      }
+    </div>
+
+    <div class="form-floating">
+      <input type="password" class="form-control" id="contrasena" placeholder="Contraseña" formControlName="contrasena">
+      <label for="contrasena">Contraseña</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="password" class="form-control" id="contrasenaConfirm" placeholder="Contrasena" formControlName="contrasenaConfirm">
+      <label for="passwordConfirm">Confirmación contraseña</label>
+      @if(registerForm.controls.contrasenaConfirm.touched && registerForm.getError('confirmError')) {
+        <div>
+            <small class="text-danger">Las contraseñas no coinciden.</small>
+        </div>
+      }
+    </div>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="edad" placeholder="" formControlName="edad">
+      <label for="edad">Edad</label>
+      @if(registerForm.controls.edad.touched && registerForm.controls.edad.errors) {
+        <div>
+          @if (registerForm.controls.edad.errors['required']) {
+            <small class="text-danger">Teléfono es obligatorio.</small>
+          }
+          @if (registerForm.controls.edad.errors['pattern']) {
+            <small class="text-danger">El teléfono debe tener un formato de 9 dígitos.</small>
+
+          }
+        </div>
+      }
+    </div>
+
+    <button class="btn btn-primary w-100 py-2" type="submit" [disabled]="registerForm.invalid">Crear cuenta</button>
+    @if (registerForm.invalid) {
+      <small class="text-danger">Debes completar de forma correcta todos los campos para poder guardar.</small>
+    }
+
+    <p class="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
+  </form>
+</main>
+
